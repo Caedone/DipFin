@@ -1,29 +1,32 @@
-import React, { type JSX } from 'react';
+import React, { type JSX , type SyntheticEvent} from 'react';
 import "./Card.css"
+import type { CompanySearch } from '../../company';
+import AddPortfolio from '../Portfolio/AddPortfolio/AddPortfolio';
 
 // Creates an empty object for Props type 
 // Interfaces "labels" our data structure
 // This is useful for type checking and ensuring that the component receives the correct props
 interface Props {
-    companyName?: string;       // Only passs string values
-    ticker?: string;        // Only passs string values
-    price?: number;     // Only passs numb values
+    id: string; // Unique identifier for the card
+    searchResult: CompanySearch;
+    onPortfolioCreate: (e: SyntheticEvent) => void; // Function to handle portfolio creation
 }
 
 // PAssing Props to the Card component
 // This allows the component to receive data from its parent component
-const Card: React.FC<Props> = ({companyName, ticker, price}: Props) : JSX.Element => {
+const Card: React.FC<Props> = ({id,searchResult, onPortfolioCreate }: Props) : JSX.Element => {
     return (
         <div className="card">
             <img 
-                src="https://images.pexels.com/photos/32486152/pexels-photo-32486152.jpeg" 
-                alt="Placeholder" 
+                alt="Company Logo" 
             />
             <div className="details">
-            <h2> {companyName} ({ticker})</h2>
-            <p>${price}</p>
+            <h2> {searchResult.name} ({searchResult.symbol})</h2>
+            <p>${searchResult.currency}</p>
             </div>
-            <p className="info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum error corporis, consectetur assumenda vero dolore at minus nemo officiis nulla fugit dolor architecto mollitia porro inventore. Accusantium odit porro expedita!</p>
+            <p className="info"> {searchResult.exchangeShortName} - {searchResult.stockExchange} </p>
+            <AddPortfolio onPortfolioCreate={onPortfolioCreate} symbol={searchResult.symbol}/>
+            
         </div>
     );
 };
