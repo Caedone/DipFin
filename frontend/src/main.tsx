@@ -1,14 +1,17 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import { searchCompanies } from './api'
+console.log('index.tsx is loading');
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import "./index.css";
+import { searchCompanies } from "./api";
+import { router } from "./Routes/Routes";
 
-console.log('About to call searchCompanies');
-searchCompanies("tsla").then(result => console.log('Final result:', result)).catch(error => console.error('Error:', error));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+    </React.StrictMode>
+);
