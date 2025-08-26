@@ -1,7 +1,15 @@
 
+import { useParams } from "react-router-dom";
+
 interface Props {}
 
 const CompanyPage = (props: Props) => {
-    return <div>CompanyPage</div>
+    const { ticker } = useParams<{ ticker: string }>();
+    
+    if (!ticker) {
+        return <div>Ticker not found</div>;
+    }
+    
+    return <div>CompanyPage for {ticker}</div>;
 };
 export default CompanyPage;
