@@ -11,7 +11,6 @@ const Navbar: React.FC = () => {
             <Link to="/">
                 <img src={logo} alt="" />
             </Link>
-          <img src={logo} alt="" />
           <div className="hidden font-bold lg:flex">
             <Link to="/search" className="text-black hover:text-dark-blue">
               Search
